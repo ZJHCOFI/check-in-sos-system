@@ -1,0 +1,7 @@
+<?php
+$link=mysqli_connect("127.0.0.1","root","Bili@233","ciss_db","3306");
+if (!$link) {
+    die("数据库连接错误" . mysqli_connect_error());
+}
+mysqli_set_charset($link,'utf8');
+?>
