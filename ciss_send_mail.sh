@@ -100,30 +100,30 @@ else
     if [[ "${no_check_days}" -ge "${Attention_day}" && "${no_check_days}" -lt "${Warning_day}" ]];then
       if [[ "${Attention_appendix}" != "" ]];then
         echo -e "${Attention_text}" | mailx -s "${Attention_title}" -a ${Attention_appendix} ${Attention_addressee}
-        echo -e "发送记录：\t${send_time}\t${Attention_title}\t${Attention_text}\t${Attention_addressee}\t${Attention_appendix}" >> ${send_mail_log}
+        echo -e "发送记录：|${send_time}|${Attention_title}|${Attention_text}|${Attention_addressee}|${Attention_appendix}" >> ${send_mail_log}
       else
         echo -e "${Attention_text}" | mailx -s "${Attention_title}" ${Attention_addressee}
-        echo -e "发送记录：\t${send_time}\t${Attention_title}\t${Attention_text}\t${Attention_addressee}" >> ${send_mail_log}
+        echo -e "发送记录：|${send_time}|${Attention_title}|${Attention_text}|${Attention_addressee}" >> ${send_mail_log}
       fi
     fi
     # 如果是情况二
     if [[ "${no_check_days}" == "${Warning_day}" ]];then
       if [[ "${Warning_appendix}" != "" ]];then
         echo -e "${Warning_text}\n\n最后五次签到记录：\n${Last_check_record}" | mailx -s "${Warning_title}" -a ${Warning_appendix} ${Warning_addressee}
-        echo -e "发送记录：\t${send_time}\t${Warning_title}\t${Warning_text}\t${Warning_addressee}\t${Warning_appendix}" >> ${send_mail_log}
+        echo -e "发送记录：|${send_time}|${Warning_title}|${Warning_text}\n\n最后五次签到记录：\n${Last_check_record}|${Warning_addressee}|${Warning_appendix}" >> ${send_mail_log}
       else
         echo -e "${Warning_text}\n\n最后五次签到记录：\n${Last_check_record}" | mailx -s "${Warning_title}" ${Warning_addressee}
-        echo -e "发送记录：\t${send_time}\t${Warning_title}\t${Warning_text}\t${Warning_addressee}" >> ${send_mail_log}
+        echo -e "发送记录：|${send_time}|${Warning_title}|${Warning_text}\n\n最后五次签到记录：\n${Last_check_record}|${Warning_addressee}" >> ${send_mail_log}
       fi
     fi
     # 如果是情况三
     if [[ "${no_check_days}" == "${Error_day}" ]];then
       if [[ "${Error_appendix}" != "" ]];then
         echo -e "${Error_text}\n\n最后五次签到记录：\n${Last_check_record}" | mailx -s "${Error_title}" -a ${Error_appendix} ${Error_addressee}
-        echo -e "发送记录：\t${send_time}\t${Error_title}\t${Error_text}\t${Error_addressee}\t${Error_appendix}" >> ${send_mail_log}
+        echo -e "发送记录：|${send_time}|${Error_title}|${Error_text}\n\n最后五次签到记录：\n${Last_check_record}|${Error_addressee}|${Error_appendix}" >> ${send_mail_log}
       else
         echo -e "${Error_text}\n\n最后五次签到记录：\n${Last_check_record}" | mailx -s "${Error_title}" ${Error_addressee}
-        echo -e "发送记录：\t${send_time}\t${Error_title}\t${Error_text}\t${Error_addressee}" >> ${send_mail_log}
+        echo -e "发送记录：|${send_time}|${Error_title}|${Error_text}\n\n最后五次签到记录：\n${Last_check_record}|${Error_addressee}" >> ${send_mail_log}
       fi
     fi  
   
