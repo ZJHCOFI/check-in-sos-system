@@ -1,128 +1,129 @@
 #!/bin/bash
 #Edit by ZJHCOFI
-#¹¦ÄÜ£º°´ÕÕÌØ¶¨Çé¿ö·¢ËÍÓÊ¼þ
-#ºóÐøÂ©¶´ÐÞ²¹(ÈçÓÐ)Í¨¸æÒ³Ãæ£ºhttps://space.bilibili.com/9704701/dynamic
-#2021-12-12 21:31
+#åŠŸèƒ½ï¼šæŒ‰ç…§ç‰¹å®šæƒ…å†µå‘é€é‚®ä»¶
+#åŽç»­æ¼æ´žä¿®è¡¥(å¦‚æœ‰)é€šå‘Šé¡µé¢ï¼šhttps://space.bilibili.com/9704701/dynamic
+#2022-12-09 12:57
 
-##########¿É±à¼­Çø#############
-#     ÇëÐÞ¸Ä "" ÄÚµÄÄÚÈÝ      #
+##########å¯ç¼–è¾‘åŒº#############
+#     è¯·ä¿®æ”¹ "" å†…çš„å†…å®¹      #
 
-#-----ÓÃ»§ÐÅÏ¢
-# Ç©µ½µÄÓÃ»§Ãû
+#-----ç”¨æˆ·ä¿¡æ¯
+# ç­¾åˆ°çš„ç”¨æˆ·å
 user_name="admin"
-# ÓÊ¼þ·¢ËÍ¼ÇÂ¼±£´æÂ·¾¶
+# é‚®ä»¶å‘é€è®°å½•ä¿å­˜è·¯å¾„
 send_mail_log="/usr/www/send_mail.log"
 
-#-----Çé¿öÒ»
-# Á¬ÐøÎ´Ç©µ½¼¸ÌìÖ´ÐÐ£¿£¨×¢£ºÈç¹ûÇé¿öÒ»·ûºÏÌõ¼þ£¬»áÔÚÇé¿ö¶þ·ûºÏÌõ¼þÇ°µÄÃ¿ÌìÖ´ÐÐ£©
+#-----æƒ…å†µä¸€
+# è¿žç»­æœªç­¾åˆ°å‡ å¤©æ‰§è¡Œï¼Ÿï¼ˆæ³¨ï¼šå¦‚æžœæƒ…å†µä¸€ç¬¦åˆæ¡ä»¶ï¼Œä¼šåœ¨æƒ…å†µäºŒç¬¦åˆæ¡ä»¶å‰çš„æ¯å¤©æ‰§è¡Œï¼‰
 Attention_day="1"
-# ÓÊ¼þ±êÌâ
-Attention_title="Ç©µ½ÌáÊ¾"
-# ÓÊ¼þÕýÎÄ£¨»»ÐÐÇëÊ¹ÓÃ"\n"£©
-Attention_text="¸ÃÇ©µ½À²£¡\nÔÙ²»Ç©µ½ÄãµÄÒþË½¾Í×Ô¶¯·¢³öÈ¥ÁË£¡"
-# ÓÊ¼þ¸½¼þÂ·¾¶£¨Ã»ÓÐ¸½¼þÇëÁô¿Õ£©
+# é‚®ä»¶æ ‡é¢˜
+Attention_title="ç­¾åˆ°æç¤º"
+# é‚®ä»¶æ­£æ–‡ï¼ˆæ¢è¡Œè¯·ä½¿ç”¨"\n"ï¼‰
+Attention_text="è¯¥ç­¾åˆ°å•¦ï¼\nå†ä¸ç­¾åˆ°ä½ çš„éšç§å°±è‡ªåŠ¨å‘å‡ºåŽ»äº†ï¼"
+# é‚®ä»¶é™„ä»¶è·¯å¾„ï¼ˆæ²¡æœ‰é™„ä»¶è¯·ç•™ç©ºï¼‰
 Attention_appendix=""
-# ÓÊ¼þÊÕ¼þÈË£¨¶à¸öÊÕ¼þÈËÇëÓÃÓ¢ÎÄ¶ººÅ","·Ö¸î£©
+# é‚®ä»¶æ”¶ä»¶äººï¼ˆå¤šä¸ªæ”¶ä»¶äººè¯·ç”¨è‹±æ–‡é€—å·","åˆ†å‰²ï¼‰
 Attention_addressee="test@qq.com"
 
-#-----Çé¿ö¶þ
-# Á¬ÐøÎ´Ç©µ½¼¸ÌìÖ´ÐÐ£¿£¨Ö»ÔÚ·ûºÏÌõ¼þµÄµ±ÌìÖ´ÐÐ£©
+#-----æƒ…å†µäºŒ
+# è¿žç»­æœªç­¾åˆ°å‡ å¤©æ‰§è¡Œï¼Ÿï¼ˆåªåœ¨ç¬¦åˆæ¡ä»¶çš„å½“å¤©æ‰§è¡Œï¼‰
 Warning_day="3"
-# ÓÊ¼þ±êÌâ
-Warning_title="ZJH¿ÉÄÜÔâÓöÒâÍâ£¬Çë¾¡¿ìÁªÏµËû"
-# ÓÊ¼þÕýÎÄ£¨»»ÐÐÇëÊ¹ÓÃ"\n"£©
-Warning_text="ZJH¿ÉÄÜÔâÓöÒâÍâ£¬Çë¾¡¿ìÁªÏµËû\nËûµÄÊÖ»úºÅ£º12345\nËû¸¸Ç×µÄÊÖ»úºÅ£º12345\nËûÄ¸Ç×µÄÊÖ»úºÅ£º12345\n\n´ËÓÊ¼þÓÉÇ©µ½ÏµÍ³×Ô¶¯·¢³ö£¬ËûÒÑ¾­${Warning_day}ÌìÃ»Ç©µ½ÁË"
-# ÓÊ¼þ¸½¼þÂ·¾¶£¨Ã»ÓÐ¸½¼þÇëÁô¿Õ£©
+# é‚®ä»¶æ ‡é¢˜
+Warning_title="ZJHå¯èƒ½é­é‡æ„å¤–ï¼Œè¯·å°½å¿«è”ç³»ä»–"
+# é‚®ä»¶æ­£æ–‡ï¼ˆæ¢è¡Œè¯·ä½¿ç”¨"\n"ï¼‰
+Warning_text="ZJHå¯èƒ½é­é‡æ„å¤–ï¼Œè¯·å°½å¿«è”ç³»ä»–\nä»–çš„æ‰‹æœºå·ï¼š12345\nä»–çˆ¶äº²çš„æ‰‹æœºå·ï¼š12345\nä»–æ¯äº²çš„æ‰‹æœºå·ï¼š12345\n\næ­¤é‚®ä»¶ç”±ç­¾åˆ°ç³»ç»Ÿè‡ªåŠ¨å‘å‡ºï¼Œä»–å·²ç»${Warning_day}å¤©æ²¡ç­¾åˆ°äº†"
+# é‚®ä»¶é™„ä»¶è·¯å¾„ï¼ˆæ²¡æœ‰é™„ä»¶è¯·ç•™ç©ºï¼‰
 Warning_appendix=""
-# ÓÊ¼þÊÕ¼þÈË£¨¶à¸öÊÕ¼þÈËÇëÓÃÓ¢ÎÄ¶ººÅ","·Ö¸î£©
+# é‚®ä»¶æ”¶ä»¶äººï¼ˆå¤šä¸ªæ”¶ä»¶äººè¯·ç”¨è‹±æ–‡é€—å·","åˆ†å‰²ï¼‰
 Warning_addressee="test@qq.com,test@163.com"
 
-#-----Çé¿öÈý
-# Á¬ÐøÎ´Ç©µ½¼¸ÌìÖ´ÐÐ£¿£¨Ö»ÔÚ·ûºÏÌõ¼þµÄµ±ÌìÖ´ÐÐ£©
+#-----æƒ…å†µä¸‰
+# è¿žç»­æœªç­¾åˆ°å‡ å¤©æ‰§è¡Œï¼Ÿï¼ˆåªåœ¨ç¬¦åˆæ¡ä»¶çš„å½“å¤©æ‰§è¡Œï¼‰
 Error_day="7"
-# ÓÊ¼þ±êÌâ
-Error_title="±¾ÈËÎïÆ·Ò»ÀÀ±í"
-# ÓÊ¼þÕýÎÄ£¨»»ÐÐÇëÊ¹ÓÃ"\n"£©
-Error_text="Èç¹ûÄúÊÕµ½´ËÓÊ¼þ£¬Çë½«¸ÃÓÊ¼þ¸½¼þ¸øµ½XXX¡£\n±¾ÈË¸÷ÖÖÕËºÅÃÜÂëµÈÄÚÈÝÔÚ¸½¼þÄÚ£¨¸Ã¸½¼þÒÑ¼ÓÃÜ£¬Ö»ÓÐXXXÖªµÀÃÜÂë£©\n\n´ËÓÊ¼þÓÉÇ©µ½ÏµÍ³×Ô¶¯·¢³ö£¬ËûÒÑ¾­${Error_day}ÌìÃ»Ç©µ½ÁË"
-# ÓÊ¼þ¸½¼þÂ·¾¶£¨Ã»ÓÐ¸½¼þÇëÁô¿Õ£©
+# é‚®ä»¶æ ‡é¢˜
+Error_title="æœ¬äººç‰©å“ä¸€è§ˆè¡¨"
+# é‚®ä»¶æ­£æ–‡ï¼ˆæ¢è¡Œè¯·ä½¿ç”¨"\n"ï¼‰
+Error_text="å¦‚æžœæ‚¨æ”¶åˆ°æ­¤é‚®ä»¶ï¼Œè¯·å°†è¯¥é‚®ä»¶é™„ä»¶ç»™åˆ°XXXã€‚\næœ¬äººå„ç§è´¦å·å¯†ç ç­‰å†…å®¹åœ¨é™„ä»¶å†…ï¼ˆè¯¥é™„ä»¶å·²åŠ å¯†ï¼Œåªæœ‰XXXçŸ¥é“å¯†ç ï¼‰\n\næ­¤é‚®ä»¶ç”±ç­¾åˆ°ç³»ç»Ÿè‡ªåŠ¨å‘å‡ºï¼Œä»–å·²ç»${Error_day}å¤©æ²¡ç­¾åˆ°äº†"
+# é‚®ä»¶é™„ä»¶è·¯å¾„ï¼ˆæ²¡æœ‰é™„ä»¶è¯·ç•™ç©ºï¼‰
 Error_appendix="/usr/www/ZJH_something.zip"
-# ÓÊ¼þÊÕ¼þÈË£¨¶à¸öÊÕ¼þÈËÇëÓÃÓ¢ÎÄ¶ººÅ","·Ö¸î£©
+# é‚®ä»¶æ”¶ä»¶äººï¼ˆå¤šä¸ªæ”¶ä»¶äººè¯·ç”¨è‹±æ–‡é€—å·","åˆ†å‰²ï¼‰
 Error_addressee="test@qq.com,test@163.com"
 
-#-----Êý¾Ý¿âÐÅÏ¢
-# mysqlÊý¾Ý¿âÓÃ»§Ãû
+#-----æ•°æ®åº“ä¿¡æ¯
+# mysqlæ•°æ®åº“ç”¨æˆ·å
 mysql_user="root"
 
-# mysqlÊý¾Ý¿âÃÜÂë
+# mysqlæ•°æ®åº“å¯†ç 
 mysql_passwd="Bili@233"
 
-# mysqlÊý¾Ý¿â¶Ë¿Ú£¨Ä¬ÈÏÎª3306£©
+# mysqlæ•°æ®åº“ç«¯å£ï¼ˆé»˜è®¤ä¸º3306ï¼‰
 mysql_port="3306"
 
-#########¿É±à¼­Çø½áÊø#########
+#########å¯ç¼–è¾‘åŒºç»“æŸ#########
 
 #-----------------------------
-#-------ÒÔÏÂ´úÂëÇëÎð¶¯--------
+#-------ä»¥ä¸‹ä»£ç è¯·å‹¿åŠ¨--------
 #-----------------------------
 
-# µ±Ç°Ê±¼ä
+# å½“å‰æ—¶é—´
 send_time=$(date "+%Y-%m-%d %H:%M:%S")
 
-# ¼ì²âÊý¾Ý¿âÁ¬½Ó
+# æ£€æµ‹æ•°æ®åº“è¿žæŽ¥
 mysql -P${mysql_port} -u${mysql_user} -p${mysql_passwd} ciss_db -e "select count(*) from ciss_user where user_name='${user_name}'" > sql.temp	
 mysql_check=`tail -n 1 sql.temp`
 mysql_printf_check=`echo -n "${mysql_check}" | tr -d '^[0-9]+$'`
 
-# Èç¹ûÊý¾Ý¿âÁ¬½ÓÒì³£
+# å¦‚æžœæ•°æ®åº“è¿žæŽ¥å¼‚å¸¸
 if [[ "${mysql_check}" == "" || "${mysql_printf_check}" != "" ]];then
 
-  echo -e "\n¡¾´íÎó¡¿Êý¾Ý¿âÁ¬½Ó»òÕß²éÑ¯³öÏÖÎÊÌâ£¬Çë¼ì²é£º\n1¡¢¿É±à¼­ÇøµÄÊý¾Ý¿âÐÅÏ¢ÊÇ·ñÕýÈ·\n2¡¢ÊÇ·ñÒÑÊ¹ÓÃrootÈ¨ÏÞÖ´ÐÐ±¾½Å±¾\n3¡¢ÊÇ·ñÒÑÕý³£µ¼ÈësqlÎÄ¼þ\n"
+  echo -e "\nã€é”™è¯¯ã€‘æ•°æ®åº“è¿žæŽ¥æˆ–è€…æŸ¥è¯¢å‡ºçŽ°é—®é¢˜ï¼Œè¯·æ£€æŸ¥ï¼š\n1ã€å¯ç¼–è¾‘åŒºçš„æ•°æ®åº“ä¿¡æ¯æ˜¯å¦æ­£ç¡®\n2ã€æ˜¯å¦å·²ä½¿ç”¨rootæƒé™æ‰§è¡Œæœ¬è„šæœ¬\n3ã€æ˜¯å¦å·²æ­£å¸¸å¯¼å…¥sqlæ–‡ä»¶\n"
   exit
 
 else
 
-  # Èç¹ûÊý¾Ý¿âÁ¬½ÓÕý³££¬µ«ÓÃ»§Ãû²»´æÔÚ
+  # å¦‚æžœæ•°æ®åº“è¿žæŽ¥æ­£å¸¸ï¼Œä½†ç”¨æˆ·åä¸å­˜åœ¨
   if [[ "${mysql_check}" == "0" ]];then
     
-    echo -e "\n¡¾´íÎó¡¿ÓÃ»§Ãû²»´æÔÚ£¬ÇëÐÞ¸Ä£¡\n"
+    echo -e "\nã€é”™è¯¯ã€‘ç”¨æˆ·åä¸å­˜åœ¨ï¼Œè¯·ä¿®æ”¹ï¼\n"
     exit
     
   else
-    # Î´Ç©µ½µÄÌìÊý²éÑ¯
+    # æœªç­¾åˆ°çš„å¤©æ•°æŸ¥è¯¢
     no_check_days=`mysql -P${mysql_port} -u${mysql_user} -p${mysql_passwd} ciss_db -e "SELECT datediff(DATE_FORMAT(now(),'%Y-%m-%d'),DATE_FORMAT(c.check_time,'%Y-%m-%d')) FROM ciss_user u left join ciss_check_in c on u.user_id = c.check_user_id where u.user_name = '${user_name}' order by c.check_time desc limit 1" | grep -v check`
-    # Èç¹ûÃ»ÓÐÇ©µ½¼ÇÂ¼
+    Last_check_record=`mysql -P${mysql_port} -u${mysql_user} -p${mysql_passwd} ciss_db -e "SELECT c.check_time,c.check_user_ip FROM ciss_user u left join ciss_check_in c on u.user_id = c.check_user_id where u.user_name = '${user_name}' order by c.check_time desc limit 5" | grep -v check`
+    # å¦‚æžœæ²¡æœ‰ç­¾åˆ°è®°å½•
     if [[ "${no_check_days}" == "" || "${no_check_days}" == "NULL" ]];then
-    	echo -e "${send_time}\tÎÞÇ©µ½¼ÇÂ¼" >> ${send_mail_log}
+    	echo -e "${send_time}\tæ— ç­¾åˆ°è®°å½•" >> ${send_mail_log}
     	exit
     fi
-    # Èç¹ûÊÇÇé¿öÒ»
+    # å¦‚æžœæ˜¯æƒ…å†µä¸€
     if [[ "${no_check_days}" -ge "${Attention_day}" && "${no_check_days}" -lt "${Warning_day}" ]];then
       if [[ "${Attention_appendix}" != "" ]];then
         echo -e "${Attention_text}" | mailx -s "${Attention_title}" -a ${Attention_appendix} ${Attention_addressee}
-        echo -e "·¢ËÍ¼ÇÂ¼£º\t${send_time}\t${Attention_title}\t${Attention_text}\t${Attention_addressee}\t${Attention_appendix}" >> ${send_mail_log}
+        echo -e "å‘é€è®°å½•ï¼š\t${send_time}\t${Attention_title}\t${Attention_text}\t${Attention_addressee}\t${Attention_appendix}" >> ${send_mail_log}
       else
         echo -e "${Attention_text}" | mailx -s "${Attention_title}" ${Attention_addressee}
-        echo -e "·¢ËÍ¼ÇÂ¼£º\t${send_time}\t${Attention_title}\t${Attention_text}\t${Attention_addressee}" >> ${send_mail_log}
+        echo -e "å‘é€è®°å½•ï¼š\t${send_time}\t${Attention_title}\t${Attention_text}\t${Attention_addressee}" >> ${send_mail_log}
       fi
     fi
-    # Èç¹ûÊÇÇé¿ö¶þ
+    # å¦‚æžœæ˜¯æƒ…å†µäºŒ
     if [[ "${no_check_days}" == "${Warning_day}" ]];then
       if [[ "${Warning_appendix}" != "" ]];then
-        echo -e "${Warning_text}" | mailx -s "${Warning_title}" -a ${Warning_appendix} ${Warning_addressee}
-        echo -e "·¢ËÍ¼ÇÂ¼£º\t${send_time}\t${Warning_title}\t${Warning_text}\t${Warning_addressee}\t${Warning_appendix}" >> ${send_mail_log}
+        echo -e "${Warning_text}\n\næœ€åŽäº”æ¬¡ç­¾åˆ°è®°å½•ï¼š\n${Last_check_record}" | mailx -s "${Warning_title}" -a ${Warning_appendix} ${Warning_addressee}
+        echo -e "å‘é€è®°å½•ï¼š\t${send_time}\t${Warning_title}\t${Warning_text}\t${Warning_addressee}\t${Warning_appendix}" >> ${send_mail_log}
       else
-        echo -e "${Warning_text}" | mailx -s "${Warning_title}" ${Warning_addressee}
-        echo -e "·¢ËÍ¼ÇÂ¼£º\t${send_time}\t${Warning_title}\t${Warning_text}\t${Warning_addressee}" >> ${send_mail_log}
+        echo -e "${Warning_text}\n\næœ€åŽäº”æ¬¡ç­¾åˆ°è®°å½•ï¼š\n${Last_check_record}" | mailx -s "${Warning_title}" ${Warning_addressee}
+        echo -e "å‘é€è®°å½•ï¼š\t${send_time}\t${Warning_title}\t${Warning_text}\t${Warning_addressee}" >> ${send_mail_log}
       fi
     fi
-    # Èç¹ûÊÇÇé¿öÈý
+    # å¦‚æžœæ˜¯æƒ…å†µä¸‰
     if [[ "${no_check_days}" == "${Error_day}" ]];then
       if [[ "${Error_appendix}" != "" ]];then
-        echo -e "${Error_text}" | mailx -s "${Error_title}" -a ${Error_appendix} ${Error_addressee}
-        echo -e "·¢ËÍ¼ÇÂ¼£º\t${send_time}\t${Error_title}\t${Error_text}\t${Error_addressee}\t${Error_appendix}" >> ${send_mail_log}
+        echo -e "${Error_text}\n\næœ€åŽäº”æ¬¡ç­¾åˆ°è®°å½•ï¼š\n${Last_check_record}" | mailx -s "${Error_title}" -a ${Error_appendix} ${Error_addressee}
+        echo -e "å‘é€è®°å½•ï¼š\t${send_time}\t${Error_title}\t${Error_text}\t${Error_addressee}\t${Error_appendix}" >> ${send_mail_log}
       else
-        echo -e "${Error_text}" | mailx -s "${Error_title}" ${Error_addressee}
-        echo -e "·¢ËÍ¼ÇÂ¼£º\t${send_time}\t${Error_title}\t${Error_text}\t${Error_addressee}" >> ${send_mail_log}
+        echo -e "${Error_text}\n\næœ€åŽäº”æ¬¡ç­¾åˆ°è®°å½•ï¼š\n${Last_check_record}" | mailx -s "${Error_title}" ${Error_addressee}
+        echo -e "å‘é€è®°å½•ï¼š\t${send_time}\t${Error_title}\t${Error_text}\t${Error_addressee}" >> ${send_mail_log}
       fi
     fi  
   
