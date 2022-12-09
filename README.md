@@ -12,9 +12,10 @@
 
 ### 2022-12-09 新增了签到时记录IP地址，发送邮件时自动带上最后五次签到记录的功能  
   
-**web/check-in.php**：新增了签到时记录IP地址的功能  
-**ciss_send_mail.sh**：新增了发送邮件时自动带上最后五次签到记录的功能  
-**ciss_db.sql**：新增了用于记录IP的字段  
+`web/check-in.php`：新增了签到时记录IP地址的功能  
+`ciss_send_mail.sh`：新增了发送邮件时自动带上最后五次签到记录的功能  
+`ciss_db.sql`：新增了用于记录IP的字段  
+  
 如已部署了旧版本的sql文件，可以输入以下语句新增字段：  
 mysql> `use ciss_db;`  
 mysql> `ALTER TABLE ciss_check_in ADD COLUMN check_user_ip varchar(40) DEFAULT NULL COMMENT '签到的用户ip地址' AFTER check_user_id;`  
