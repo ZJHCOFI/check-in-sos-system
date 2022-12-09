@@ -26,6 +26,7 @@ CREATE TABLE `ciss_check_in` (
   `check_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '签到记录唯一id',
   `check_time` datetime NOT NULL COMMENT '签到记录',
   `check_user_id` varchar(40) NOT NULL COMMENT '签到的用户id',
+  `check_user_ip` varchar(40) DEFAULT NULL COMMENT '签到的用户ip地址',
   PRIMARY KEY (`check_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='签到记录表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -88,6 +89,7 @@ CREATE TABLE `ciss_user` (
   `user_name` varchar(20) NOT NULL COMMENT '用户名',
   `user_passwd` varchar(70) NOT NULL COMMENT '密码',
   `user_last_login_time` datetime DEFAULT NULL COMMENT '最后登录时间',
+  `user_last_login_ip` varchar(40) DEFAULT NULL COMMENT '最后登录的IP地址',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户信息表';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -128,4 +130,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-12-13 11:42:11
+-- Dump completed on 2021-12-14 11:51:40
