@@ -135,14 +135,14 @@ else
 		else
 		{
 			//插入登录记录
-			$sql_save_login = "update ciss_user set user_last_login_time=now() where user_id='$uuid'";
+			$sql_save_login = "update ciss_user set user_last_login_time=now(),user_last_login_ip='$user_IP' where user_id='$uuid'";
 			$result_save_login = mysqli_query($link,$sql_save_login);
 			if(!$result_save_login){
 				die('<div><font color="#FF4444" size="+1">数据库连接错误</font></div>' . mysqli_connect_error());
 			}
 
 			//插入签到记录
-			$sql_save_check_in = "insert into ciss_check_in (check_time,check_user_id) values (now(),'$uuid')";
+			$sql_save_check_in = "insert into ciss_check_in (check_time,check_user_id,check_user_ip) values (now(),'$uuid','$user_IP')";
 			$result_save_check_in = mysqli_query($link,$sql_save_check_in);
 			if(!$result_save_check_in){
 				die('<div><font color="#FF4444" size="+1">数据库连接错误</font></div>' . mysqli_connect_error());
@@ -157,24 +157,27 @@ else
 				  
 //显示最近5条签到记录
 echo '<p></p><div><b><font size="+1">最近5条签到记录，如需修改密码请<a href="reset-pass.php" target="_blank">点这</a></font></b><p></p>';
-echo '<table width="400" border="1" cellpadding="0" cellspacing="0">
+echo '<table width="460" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-		  <td width="50%" align="center">签到用户</td>
-		  <td width="50%" align="center">签到时间</td>
+		  <td width="20%" align="center">签到用户</td>
+		  <td width="40%" align="center">签到时间</td>
+		  <td width="40%" align="center">IP地址</td>
 		</tr>
 	</table>';
 //获取签到记录
-$sql_check_in_record = "SELECT u.user_name,c.check_time FROM ciss_user u left join ciss_check_in c on u.user_id = c.check_user_id where c.check_user_id = '$uuid' order by c.check_time desc limit 5";
+$sql_check_in_record = "SELECT u.user_name,c.check_time,c.check_user_ip FROM ciss_user u left join ciss_check_in c on u.user_id = c.check_user_id where c.check_user_id = '$uuid' order by c.check_time desc limit 5";
 $res_check_in_record = mysqli_query($link,$sql_check_in_record);
 while($while_check_in_record = mysqli_fetch_array($res_check_in_record,MYSQL_ASSOC))
 {
 	$user_name = $while_check_in_record['user_name'];
 	$check_time = $while_check_in_record['check_time'];
+	$check_user_ip = $while_check_in_record['check_user_ip'];
 
-	echo '<table width="400" border="1" cellpadding="0" cellspacing="0">
+	echo '<table width="460" border="1" cellpadding="0" cellspacing="0">
 		<tr>
-		  <td width="50%" align="center">'.$user_name.'</td>
-		  <td width="50%" align="center">'.$check_time.'</td>
+		  <td width="20%" align="center">'.$user_name.'</td>
+		  <td width="40%" align="center">'.$check_time.'</td>
+		  <td width="40%" align="center">'.$check_user_ip.'</td>
 		</tr>
 	</table>';
 }
