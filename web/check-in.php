@@ -75,7 +75,7 @@ function isUUID($val)
 $user_IP = ($_SERVER["HTTP_VIA"]) ? $_SERVER["HTTP_X_FORWARDED_FOR"] : $_SERVER["REMOTE_ADDR"];
 $user_IP = ($user_IP) ? $user_IP : $_SERVER["REMOTE_ADDR"];
 				  
-//连接数据库【 这里有文件名要改！】
+//连接数据库
 include("webconn.php");
 //记录最后时间及IP
 if(isip($user_IP) == true && strlen($user_IP) <= 20)
@@ -93,7 +93,7 @@ else
 mysqli_close($link);
 
 //判断是否已签到，如果已签到则显示已签到，否则出现“签到”按钮
-//连接数据库【 这里有文件名要改！】
+//连接数据库
 include("webconn.php");
 //检查错误
 if(isUUID($uuid) == false)
